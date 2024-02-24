@@ -37,9 +37,9 @@
                 {
                     "name": "",
                     "id": "653d0af6-feda-437b-8f9e-3fb2e0e3f7db",
-                    "path": "<Pointer>/delta",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.1,y=0.1)",
                     "groups": "Desktop",
                     "action": "Look",
                     "isComposite": false,

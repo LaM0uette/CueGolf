@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Modules.Player.Inputs
 {
@@ -6,6 +7,8 @@ namespace Game.Modules.Player.Inputs
     {
         #region Statements
 
+        public Vector2 LookValue { get; private set; }
+        
         private PlayerSoap _playerSoap;
         
         private void Awake()
@@ -16,6 +19,8 @@ namespace Game.Modules.Player.Inputs
         #endregion
 
         #region Events
+        
+        public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
 
         public void OnPutterPress() => _playerSoap.PutterPressEvent.Raise();
         public void OnPutterRelease() => _playerSoap.PutterReleaseEvent.Raise();

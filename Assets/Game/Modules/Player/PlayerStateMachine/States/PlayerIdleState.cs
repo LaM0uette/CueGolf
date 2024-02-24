@@ -9,5 +9,14 @@
         }
 
         #endregion
+
+        #region Events
+
+        public override void Tick(float deltaTime)
+        {
+            RotateCamera();
+        }
+
+        #endregion
     }
 }
