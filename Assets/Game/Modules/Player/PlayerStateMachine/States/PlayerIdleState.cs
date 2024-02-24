@@ -1,4 +1,6 @@
-﻿namespace Game.Modules.Player.PlayerStateMachine.States
+﻿using UnityEngine;
+
+namespace Game.Modules.Player.PlayerStateMachine.States
 {
     public class PlayerIdleState : PlayerBaseState
     {
@@ -11,10 +13,29 @@
         #endregion
 
         #region Events
+        
+        public override void Enter()
+        {
+            StateMachine.Soap.PutterPressEvent.OnRaised += OnPutterPress;
+        }
+        
+        public override void Exit()
+        {
+            StateMachine.Soap.PutterPressEvent.OnRaised -= OnPutterPress;
+        }
 
         public override void Tick(float deltaTime)
         {
             RotateCamera();
+        }
+
+        #endregion
+
+        #region Functions
+
+        private void OnPutterPress()
+        {
+            StateMachine.SwitchState(new PlayerPutterState(StateMachine));
         }
 
         #endregion

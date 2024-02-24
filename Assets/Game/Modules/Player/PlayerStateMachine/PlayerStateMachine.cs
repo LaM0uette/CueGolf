@@ -14,6 +14,7 @@ namespace Game.Modules.Player.PlayerStateMachine
         #region Statements
         
         public InputsReader Inputs { get; private set; }
+        public PlayerSoap Soap { get; private set; }
         
         [Title("Cinemachine")]
         [Range(0f, 100f)] public float MouseSensitivity = 30f;
@@ -24,6 +25,7 @@ namespace Game.Modules.Player.PlayerStateMachine
         private void Awake()
         {
             Inputs = GetComponent<InputsReader>();
+            Soap = GetComponent<PlayerSoap>();
         }
 
         private void Start()
