@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Modules.Player.PlayerStateMachine.States
+﻿namespace Game.Modules.Player.PlayerStateMachine.States
 {
     public class PlayerIdleState : PlayerBaseState
     {
@@ -13,6 +11,11 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         #endregion
 
         #region Events
+        
+        public override void OnDisable()
+        {
+            StateMachine.Soap.PutterPressEvent.OnRaised -= OnPutterPress;
+        }
         
         public override void Enter()
         {

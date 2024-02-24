@@ -13,6 +13,16 @@ namespace Game.Modules.Scripts.StateMachines
             _currentState?.Enter();
         }
 
+        private void OnEnable()
+        {
+            _currentState?.OnEnable();
+        }
+        
+        private void OnDisable()
+        {
+            _currentState?.OnDisable();
+        }
+
         private void Update()
         {
             _currentState.CheckState();
