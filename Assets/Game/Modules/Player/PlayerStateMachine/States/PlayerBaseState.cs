@@ -11,8 +11,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         protected readonly PlayerStateMachine StateMachine;
         
         // Camera Rotation
-        private static float _cinemachineTargetYaw;
-        private static float _cinemachineTargetPitch;
+        private static Vector2 _cinemachineTarget;
         
         protected PlayerBaseState(PlayerStateMachine stateMachine)
         {
@@ -26,14 +25,14 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         protected void RotateCamera()
         {
             var deltaTimeMultiplier = Time.deltaTime;
+            
+            _cinemachineTarget.x += StateMachine.Inputs.LookValue.x * deltaTimeMultiplier * StateMachine.MouseSensitivity * 10;
+            _cinemachineTarget.y += StateMachine.Inputs.LookValue.y * deltaTimeMultiplier * StateMachine.MouseSensitivity * 10;
 
-            _cinemachineTargetYaw += StateMachine.Inputs.LookValue.x * deltaTimeMultiplier * StateMachine.MouseSensitivity * 10;
-            _cinemachineTargetPitch += StateMachine.Inputs.LookValue.y * deltaTimeMultiplier * StateMachine.MouseSensitivity * 10;
+            _cinemachineTarget.x = _cinemachineTarget.x.ClampAngle(float.MinValue, float.MaxValue);
+            _cinemachineTarget.y = _cinemachineTarget.y.ClampAngle(StateMachine.BottomClamp, StateMachine.TopClamp);
 
-            _cinemachineTargetYaw = _cinemachineTargetYaw.ClampAngle(float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = _cinemachineTargetPitch.ClampAngle(StateMachine.BottomClamp, StateMachine.TopClamp);
-
-            StateMachine.CameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
+            StateMachine.CameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTarget.y, _cinemachineTarget.x, 0.0f);
         }
 
         #endregion
