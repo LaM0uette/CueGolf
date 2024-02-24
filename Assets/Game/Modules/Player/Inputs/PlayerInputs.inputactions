@@ -15,12 +15,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "PutterPress",
                     "type": "Button",
                     "id": "ea78b034-9ddb-4371-af02-10a61eefdb53",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PutterRelease",
+                    "type": "Button",
+                    "id": "82a40563-a1eb-4beb-91f2-a94a9faf136b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 }
             ],
@@ -43,7 +52,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Desktop",
-                    "action": "Shoot",
+                    "action": "PutterPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52c44526-08f9-4843-9f8d-44fbe7cf003d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Desktop",
+                    "action": "PutterRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

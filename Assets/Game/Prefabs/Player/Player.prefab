@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8710210613045552303}
   - component: {fileID: 1849854596035169574}
-  - component: {fileID: 4449816752221399113}
-  - component: {fileID: 8534095803032958204}
   - component: {fileID: 7562164582054864552}
   - component: {fileID: 80006982055293094}
+  - component: {fileID: 528230804204940807}
+  - component: {fileID: 4449816752221399113}
+  - component: {fileID: 8534095803032958204}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -68,30 +69,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4449816752221399113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517758534093595922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4526fd4cd303342a618e849d1f1068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8534095803032958204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517758534093595922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc5a41dc98d0e440b12ad2330ea8dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &7562164582054864552
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -140,6 +117,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &528230804204940807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517758534093595922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b487b558e7160489f3806e12135b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PutterPressEvent: {fileID: 11400000, guid: a14cd9daa0ba0d14fab1adaf7e73c27a, type: 2}
+  PutterReleaseEvent: {fileID: 11400000, guid: b523863663c7c9c49a18ed18ecf4d798, type: 2}
+--- !u!114 &4449816752221399113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517758534093595922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c4526fd4cd303342a618e849d1f1068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8534095803032958204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517758534093595922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcc5a41dc98d0e440b12ad2330ea8dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6438862050173570446
 GameObject:
   m_ObjectHideFlags: 0
