@@ -142,25 +142,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 2481783753443443232}
-    - target: {fileID: 4872215647766736480, guid: 66e48c83f56de3540a8ef73d22bfa756,
-        type: 3}
-      propertyPath: m_ChildCameras.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069836020350343226, guid: 66e48c83f56de3540a8ef73d22bfa756,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 6377514612121822038, guid: 66e48c83f56de3540a8ef73d22bfa756,
         type: 3}
       propertyPath: m_Name
       value: PlayerCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 8904663564149720519, guid: 66e48c83f56de3540a8ef73d22bfa756,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

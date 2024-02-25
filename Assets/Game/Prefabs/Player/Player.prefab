@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5047bb144512af46b158645a7e70e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cue: {fileID: 0}
   ForceMultiplier: 10
   MouseSensitivity: 45
   TopClamp: 90

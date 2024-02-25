@@ -8,6 +8,8 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         #region Statements
         
         private Vector3 _lastMousePosition;
+        private float _putterY;
+        private bool _putterIsReady;
 
         public PlayerPutterState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
@@ -36,18 +38,43 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         #endregion
 
+        #region Events
+        
+        public override void Tick(float deltaTime)
+        {
+            _putterY += StateMachine.Inputs.LookValue.y * deltaTime;
+            
+            if (_putterY > 0.01f)
+            {
+                _putterIsReady = true;
+            }
+            
+            if (_putterY <= 0 && _putterIsReady)
+            {
+                _putterIsReady = false;
+                Shoot();
+            }
+        }
+
+        #endregion
+
         #region Functions
 
         private void OnPutterRelease()
         {
+            _putterIsReady = false;
+            StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+        }
+
+        private void Shoot()
+        {
             var mouseDelta = (Vector3)Mouse.current.position.ReadValue() - _lastMousePosition;
             var speed = mouseDelta.magnitude / Time.deltaTime;
+            speed /= 100f;
 
             var hitDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
-            var force = hitDirection * (StateMachine.ForceMultiplier);
+            var force = hitDirection * (speed * StateMachine.ForceMultiplier);
 
-            Debug.Log($"force: {force}");
-            Debug.Log($"speed: {speed}");
             StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
             
             StateMachine.SwitchState(new PlayerIdleState(StateMachine));
