@@ -10,6 +10,8 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         private Vector3 _lastMousePosition;
         private float _putterY;
         private bool _putterIsReady;
+        private Vector2 _mouseVelocity;
+        private float _forceMultiplier = 1f;
 
         public PlayerPutterState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
@@ -42,6 +44,10 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         
         public override void Tick(float deltaTime)
         {
+            Vector3 currentMousePosition = Mouse.current.position.ReadValue();
+            _mouseVelocity = (currentMousePosition - _lastMousePosition) / deltaTime;
+            _lastMousePosition = currentMousePosition;
+            
             _putterY += StateMachine.Inputs.LookValue.y * deltaTime;
             
             if (_putterY > 0.01f)
@@ -68,13 +74,12 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         private void Shoot()
         {
-            var mouseDelta = (Vector3)Mouse.current.position.ReadValue() - _lastMousePosition;
-            var speed = mouseDelta.magnitude / Time.deltaTime;
-            speed /= 100f;
+            var forceDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
+            float forceMagnitude = _mouseVelocity.magnitude * _forceMultiplier;
+            Vector3 force = forceDirection * forceMagnitude;
 
-            var hitDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
-            var force = hitDirection * (speed * StateMachine.ForceMultiplier);
-
+            Debug.Log("Force: " + force);
+            
             StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
             
             StateMachine.SwitchState(new PlayerIdleState(StateMachine));
