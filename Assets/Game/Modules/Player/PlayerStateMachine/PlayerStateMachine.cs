@@ -6,21 +6,22 @@ using UnityEngine;
 
 namespace Game.Modules.Player.PlayerStateMachine
 {
-    [RequireComponent(typeof(SphereCollider))]
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(PlayerSoap))]
     [RequireComponent(typeof(InputsReader))]
     public class PlayerStateMachine : StateMachine
     {
         #region Statements
-        
-        public Rigidbody Rigidbody { get; private set; }
+
         public InputsReader Inputs { get; private set; }
         public PlayerSoap Soap { get; private set; }
         public Camera PlayerCamera { get; private set; }
         
         [Space, Title("Player Settings")]
+        public Rigidbody Rigidbody;
         public float ForceMultiplier = 100f;
+        public float CuePosOffset = -0.55f;
+        public Transform PlayerBall;
+        public Cue Cue;
         
         [Space, Title("Cinemachine")]
         public float MouseSensitivity = 45f;
@@ -30,7 +31,6 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void Awake()
         {
-            Rigidbody = GetComponent<Rigidbody>();
             Inputs = GetComponent<InputsReader>();
             Soap = GetComponent<PlayerSoap>();
             

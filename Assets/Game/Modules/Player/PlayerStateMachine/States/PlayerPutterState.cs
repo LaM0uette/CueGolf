@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Game.Modules.Player.PlayerStateMachine.States
 {
@@ -7,11 +6,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
     {
         #region Statements
         
-        private Vector3 _lastMousePosition;
-        private float _putterY;
-        private bool _putterIsReady;
-        private Vector2 _mouseVelocity;
-        private float _forceMultiplier = 1f;
+        private float _putterPosition;
 
         public PlayerPutterState(PlayerStateMachine stateMachine) : base(stateMachine)
         {
@@ -30,7 +25,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         {
             StateMachine.Soap.PutterReleaseEvent.OnRaised += OnPutterRelease;
             
-            _lastMousePosition = Mouse.current.position.ReadValue();
+            StateMachine.Cue.SetLocalPosition(new Vector3(0, 0, StateMachine.CuePosOffset));
         }
         
         public override void Exit()
@@ -44,22 +39,8 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         
         public override void Tick(float deltaTime)
         {
-            Vector3 currentMousePosition = Mouse.current.position.ReadValue();
-            _mouseVelocity = (currentMousePosition - _lastMousePosition) / deltaTime;
-            _lastMousePosition = currentMousePosition;
-            
-            _putterY += StateMachine.Inputs.LookValue.y * deltaTime;
-            
-            if (_putterY > 0.01f)
-            {
-                _putterIsReady = true;
-            }
-            
-            if (_putterY <= 0 && _putterIsReady)
-            {
-                _putterIsReady = false;
-                Shoot();
-            }
+            _putterPosition += StateMachine.Inputs.LookValue.y * deltaTime;
+            StateMachine.Cue.SetLocalPosition(new Vector3(0, 0.05f, -_putterPosition + StateMachine.CuePosOffset));
         }
 
         #endregion
@@ -68,18 +49,21 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         private void OnPutterRelease()
         {
-            _putterIsReady = false;
-            StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+            if (_putterPosition < 0.1f)
+            {
+                StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+                return;
+            }
+            
+            Shoot();
         }
 
         private void Shoot()
         {
-            var forceDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
-            float forceMagnitude = _mouseVelocity.magnitude * _forceMultiplier;
-            Vector3 force = forceDirection * forceMagnitude;
+            var forceDirection = (StateMachine.PlayerBall.position - StateMachine.PlayerCamera.transform.position).normalized;
+            //var forceDirection = (StateMachine.PlayerBall.position - StateMachine.Cue.transform.position).normalized;
+            var force = forceDirection * _putterPosition * 10f;
 
-            Debug.Log("Force: " + force);
-            
             StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
             
             StateMachine.SwitchState(new PlayerIdleState(StateMachine));
