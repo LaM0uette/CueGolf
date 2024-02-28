@@ -24,8 +24,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         public override void Enter()
         {
             StateMachine.Soap.PutterReleaseEvent.OnRaised += OnPutterRelease;
-            
-            StateMachine.Cue.SetLocalPosition(new Vector3(0, 0, StateMachine.CuePosOffset));
         }
         
         public override void Exit()
@@ -40,7 +38,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         public override void Tick(float deltaTime)
         {
             _putterPosition += StateMachine.Inputs.LookValue.y * deltaTime;
-            StateMachine.Cue.SetLocalPosition(new Vector3(0, 0.05f, -_putterPosition + StateMachine.CuePosOffset));
         }
 
         #endregion
@@ -49,7 +46,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         private void OnPutterRelease()
         {
-            if (_putterPosition < 0.1f)
+            if (_putterPosition < StateMachine.ShootDistanceOffset)
             {
                 StateMachine.SwitchState(new PlayerIdleState(StateMachine));
                 return;
@@ -60,9 +57,12 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         private void Shoot()
         {
-            var forceDirection = (StateMachine.PlayerBall.position - StateMachine.PlayerCamera.transform.position).normalized;
-            //var forceDirection = (StateMachine.PlayerBall.position - StateMachine.Cue.transform.position).normalized;
-            var force = forceDirection * _putterPosition * 10f;
+            var forceDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
+            
+            if (forceDirection.y >= -0.2f)
+                forceDirection.y = 0;
+            
+            var force = forceDirection * (_putterPosition * StateMachine.ForceMultiplier);
 
             StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
             
