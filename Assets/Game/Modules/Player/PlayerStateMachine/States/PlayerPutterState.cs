@@ -65,8 +65,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
             var force = forceDirection * (_putterPosition * StateMachine.ForceMultiplier);
 
             StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
-            
-            StateMachine.SwitchState(new PlayerIdleState(StateMachine));
+            StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 
         #endregion
