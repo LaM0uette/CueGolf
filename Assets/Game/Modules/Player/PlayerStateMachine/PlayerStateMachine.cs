@@ -4,9 +4,11 @@ using Game.Modules.Player.PlayerStateMachine.States;
 using Game.Modules.Scripts.StateMachines;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Modules.Player.PlayerStateMachine
 {
+    [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(PlayerSoap))]
