@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceMultiplier: 150
+  ReboundForce: 0.8
   ShootDistanceOffset: 0.005
   _virtualFollowCamera: {fileID: 0}
   MouseSensitivity: 45

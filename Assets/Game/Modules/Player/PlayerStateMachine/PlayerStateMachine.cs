@@ -26,6 +26,7 @@ namespace Game.Modules.Player.PlayerStateMachine
         
         [Space, Title("Player Settings")]
         public float ForceMultiplier = 100f;
+        public float ReboundForce = 0.8f;
         public float ShootDistanceOffset = 0.002f;
         
         [Space, Title("Cinemachine")]
@@ -53,6 +54,23 @@ namespace Game.Modules.Player.PlayerStateMachine
             CursorHandler.HideCursor();
 
             SwitchState(new PlayerIdleState(this));
+        }
+
+        #endregion
+
+        #region Events
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Floor"))
+                return;
+            
+            var normal = collision.contacts[0].normal;
+            var incomingVector = Rigidbody.velocity;
+            var reflectVector = Vector3.Reflect(incomingVector, normal);
+
+            reflectVector *= ReboundForce;
+            Rigidbody.velocity = reflectVector;
         }
 
         #endregion
