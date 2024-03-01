@@ -1,3 +1,4 @@
+using Cinemachine;
 using Game.Modules.Player.Inputs;
 using Game.Modules.Player.PlayerStateMachine.States;
 using Game.Modules.Scripts.StateMachines;
@@ -18,13 +19,18 @@ namespace Game.Modules.Player.PlayerStateMachine
         public PlayerSoap Soap { get; private set; }
         public InputsReader Inputs { get; private set; }
         public Camera PlayerCamera { get; private set; }
+        public Cinemachine3rdPersonFollow FollowCamera { get; private set; }
         
         [Space, Title("Player Settings")]
         public float ForceMultiplier = 100f;
         public float ShootDistanceOffset = 0.002f;
         
         [Space, Title("Cinemachine")]
+        [SerializeField] private CinemachineVirtualCamera _virtualFollowCamera;
         public float MouseSensitivity = 45f;
+        public float ZoomForce = 10f;
+        public float MinZoom = 1f;
+        public float MaxZoom = 8f;
         [Range(0f, 180f)] public float TopClamp = 90.0f;
         [Range(0f, -180f)] public float BottomClamp;
         public GameObject CameraTarget;
@@ -36,6 +42,7 @@ namespace Game.Modules.Player.PlayerStateMachine
             Inputs = GetComponent<InputsReader>();
             
             PlayerCamera = Camera.main;
+            FollowCamera = _virtualFollowCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         }
 
         private void Start()

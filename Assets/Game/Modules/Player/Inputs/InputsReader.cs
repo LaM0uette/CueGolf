@@ -22,6 +22,16 @@ namespace Game.Modules.Player.Inputs
         
         public void OnLook(InputValue value) => LookValue = value.Get<Vector2>();
 
+        public void OnZoom(InputValue value)
+        {
+            var zoomValue = value.Get<float>();
+            
+            if (zoomValue == 0) 
+                return;
+            
+            _playerSoap.ZoomEvent.Invoke(zoomValue);
+        }
+
         public void OnPutterPress() => _playerSoap.PutterPressEvent.Raise();
         public void OnPutterRelease() => _playerSoap.PutterReleaseEvent.Raise();
 

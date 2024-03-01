@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "dfcc597c-d772-4ed7-83dd-635213bb4a3d",
+                    "expectedControlType": "Axis",
+                    "processors": "Invert,Clamp(min=-1,max=1)",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "PutterPress",
                     "type": "Button",
                     "id": "ea78b034-9ddb-4371-af02-10a61eefdb53",
@@ -64,6 +73,17 @@
                     "processors": "",
                     "groups": "Desktop",
                     "action": "PutterRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba9ba992-af02-4f32-8ebf-64d4c03bb7af",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Desktop",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

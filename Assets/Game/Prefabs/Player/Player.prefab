@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4896181471246919265}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,8 +239,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceMultiplier: 100
-  ShootDistanceOffset: 0.002
+  ShootDistanceOffset: 0.005
+  _virtualFollowCamera: {fileID: 0}
   MouseSensitivity: 45
+  ZoomForce: 60
+  MinZoom: 0.5
+  MaxZoom: 8
   TopClamp: 85
   BottomClamp: 0
   CameraTarget: {fileID: 0}

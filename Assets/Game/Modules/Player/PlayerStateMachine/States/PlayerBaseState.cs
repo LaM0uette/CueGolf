@@ -34,6 +34,13 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
             StateMachine.CameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTarget.y, _cinemachineTarget.x, 0.0f);
         }
+        
+        protected void OnZoom(float zoomValue)
+        {
+            StateMachine.FollowCamera.CameraDistance += zoomValue * StateMachine.ZoomForce * Time.deltaTime;
+            if (StateMachine.FollowCamera.CameraDistance <= StateMachine.MinZoom) StateMachine.FollowCamera.CameraDistance = StateMachine.MinZoom;
+            if (StateMachine.FollowCamera.CameraDistance >= StateMachine.MaxZoom) StateMachine.FollowCamera.CameraDistance = StateMachine.MaxZoom;
+        }
 
         #endregion
     }

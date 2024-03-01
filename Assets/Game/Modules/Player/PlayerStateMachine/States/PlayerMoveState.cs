@@ -19,9 +19,21 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         #region Events
         
+        public override void OnDisable()
+        {
+            StateMachine.Soap.ZoomEvent -= OnZoom;
+        }
+        
         public override void Enter()
         {
+            StateMachine.Soap.ZoomEvent += OnZoom;
+            
             _minimumTimeElapsed = 0f;
+        }
+        
+        public override void Exit()
+        {
+            StateMachine.Soap.ZoomEvent -= OnZoom;
         }
         
         public override void CheckState()

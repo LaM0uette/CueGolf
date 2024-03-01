@@ -1,3 +1,4 @@
+using System;
 using Obvious.Soap;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Game.Modules.Player
     {
         #region Putter Events
 
+        public Action<float> ZoomEvent { get; set; }
+        
         public ScriptableEventNoParam PutterPressEvent;
         public ScriptableEventNoParam PutterReleaseEvent;
 

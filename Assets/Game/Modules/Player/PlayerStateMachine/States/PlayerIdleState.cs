@@ -1,4 +1,6 @@
-﻿namespace Game.Modules.Player.PlayerStateMachine.States
+﻿using UnityEngine;
+
+namespace Game.Modules.Player.PlayerStateMachine.States
 {
     public class PlayerIdleState : PlayerBaseState
     {
@@ -14,16 +16,19 @@
         
         public override void OnDisable()
         {
+            StateMachine.Soap.ZoomEvent -= OnZoom;
             StateMachine.Soap.PutterPressEvent.OnRaised -= OnPutterPress;
         }
         
         public override void Enter()
         {
+            StateMachine.Soap.ZoomEvent += OnZoom;
             StateMachine.Soap.PutterPressEvent.OnRaised += OnPutterPress;
         }
         
         public override void Exit()
         {
+            StateMachine.Soap.ZoomEvent -= OnZoom;
             StateMachine.Soap.PutterPressEvent.OnRaised -= OnPutterPress;
         }
 
