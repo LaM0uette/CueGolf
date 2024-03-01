@@ -1,6 +1,7 @@
 using Cinemachine;
 using Game.Modules.Player.Inputs;
 using Game.Modules.Player.PlayerStateMachine.States;
+using Game.Modules.Scripts.Generics;
 using Game.Modules.Scripts.StateMachines;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -49,8 +50,7 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorHandler.HideCursor();
 
             SwitchState(new PlayerIdleState(this));
         }
