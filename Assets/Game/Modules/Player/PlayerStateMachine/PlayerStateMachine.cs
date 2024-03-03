@@ -63,16 +63,24 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void OnCollisionEnter(Collision collision)
         {
-            var ballVelocity = Rigidbody.velocity;
-            var incomingVector = new Vector3(ballVelocity.x, 0, ballVelocity.z);
-            Rigidbody.velocity = incomingVector;
-            Rigidbody.angularVelocity = Vector3.zero;
+            foreach (var contact in collision.contacts)
+            {
+                if (!(contact.normal.y > 0.7f)) 
+                    continue;
+                
+                var velocity = Rigidbody.velocity;
+                velocity.y = 0;
+                Rigidbody.velocity = velocity;
+            }
+            
+            return;
             
             if (collision.gameObject.CompareTag("Floor"))
                 return;
             
+            var ballVelocity = Rigidbody.velocity;
             var normal = collision.contacts[0].normal;
-            var reflectVector = Vector3.Reflect(incomingVector, normal);
+            var reflectVector = Vector3.Reflect(ballVelocity, normal);
 
             reflectVector *= ReboundForce;
             Rigidbody.velocity = reflectVector;
