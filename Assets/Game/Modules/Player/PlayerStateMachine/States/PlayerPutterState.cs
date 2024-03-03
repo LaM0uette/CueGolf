@@ -57,14 +57,13 @@ namespace Game.Modules.Player.PlayerStateMachine.States
 
         private void Shoot()
         {
-            var forceDirection = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
+            var direction = (StateMachine.transform.position - StateMachine.PlayerCamera.transform.position).normalized;
+            var force =  _putterPosition * StateMachine.ForceMultiplier;
             
-            if (forceDirection.y >= -0.2f)
-                forceDirection.y = 0;
-            
-            var force = forceDirection * (_putterPosition * StateMachine.ForceMultiplier);
+            if (direction.y >= -0.3f)
+                direction.y = 0;
 
-            StateMachine.Rigidbody.AddForce(force, ForceMode.Impulse);
+            StateMachine.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
             StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
 

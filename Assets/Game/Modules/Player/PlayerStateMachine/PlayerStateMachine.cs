@@ -65,6 +65,8 @@ namespace Game.Modules.Player.PlayerStateMachine
             if (collision.gameObject.CompareTag("Floor"))
                 return;
             
+            Debug.Log("Collided with " + collision.gameObject.name);
+            
             var normal = collision.contacts[0].normal;
             var incomingVector = Rigidbody.velocity;
             var reflectVector = Vector3.Reflect(incomingVector, normal);
