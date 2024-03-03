@@ -6,8 +6,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
     {
         #region Statements
         
-        private const float _stopMovementThreshold = 0.03f;
-        
         private float _ballVelocity;
         private float _minimumTimeElapsed;
 
@@ -59,7 +57,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         
         private void CheckForStopMovement()
         {
-            if (!(_ballVelocity <= _stopMovementThreshold)) 
+            if (!(_ballVelocity <= StateMachine.StopMovementThreshold)) 
                 return;
             
             StateMachine.Rigidbody.velocity = Vector3.zero;

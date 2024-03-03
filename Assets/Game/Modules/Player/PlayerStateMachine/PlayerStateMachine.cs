@@ -28,6 +28,7 @@ namespace Game.Modules.Player.PlayerStateMachine
         public float ForceMultiplier = 100f;
         public float ReboundForce = 0.8f;
         public float ShootDistanceOffset = 0.002f;
+        public float StopMovementThreshold = 0.05f;
         
         [Space, Title("Cinemachine")]
         [SerializeField] private CinemachineVirtualCamera _virtualFollowCamera;
@@ -62,13 +63,15 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void OnCollisionEnter(Collision collision)
         {
+            var ballVelocity = Rigidbody.velocity;
+            var incomingVector = new Vector3(ballVelocity.x, 0, ballVelocity.z);
+            Rigidbody.velocity = incomingVector;
+            Rigidbody.angularVelocity = Vector3.zero;
+            
             if (collision.gameObject.CompareTag("Floor"))
                 return;
             
-            Debug.Log("Collided with " + collision.gameObject.name);
-            
             var normal = collision.contacts[0].normal;
-            var incomingVector = Rigidbody.velocity;
             var reflectVector = Vector3.Reflect(incomingVector, normal);
 
             reflectVector *= ReboundForce;

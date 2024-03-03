@@ -62,7 +62,7 @@ namespace Game.Modules.Player.PlayerStateMachine.States
             
             if (direction.y >= -0.3f)
                 direction.y = 0;
-
+            
             StateMachine.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
             StateMachine.SwitchState(new PlayerMoveState(StateMachine));
         }
