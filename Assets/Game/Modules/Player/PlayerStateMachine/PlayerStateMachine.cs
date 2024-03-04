@@ -63,6 +63,8 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void OnCollisionEnter(Collision collision)
         {
+            return;
+            
             foreach (var contact in collision.contacts)
             {
                 if (!(contact.normal.y > 0.7f)) 
