@@ -41,6 +41,12 @@ namespace Game.Modules.Player.PlayerStateMachine.States
             if (StateMachine.FollowCamera.CameraDistance <= StateMachine.MinZoom) StateMachine.FollowCamera.CameraDistance = StateMachine.MinZoom;
             if (StateMachine.FollowCamera.CameraDistance >= StateMachine.MaxZoom) StateMachine.FollowCamera.CameraDistance = StateMachine.MaxZoom;
         }
+        
+        protected bool IsMoving()
+        {
+            var rb = StateMachine.Rigidbody;
+            return rb.velocity.magnitude != 0 || rb.angularVelocity.magnitude != 0;
+        }
 
         #endregion
     }

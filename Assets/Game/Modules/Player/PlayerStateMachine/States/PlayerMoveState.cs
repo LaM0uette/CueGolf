@@ -63,11 +63,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
             StateMachine.Rigidbody.velocity = Vector3.zero;
             StateMachine.Rigidbody.angularVelocity = Vector3.zero;
         }
-        
-        private bool IsMoving()
-        {
-            return StateMachine.Rigidbody.velocity.magnitude != 0 || StateMachine.Rigidbody.angularVelocity.magnitude != 0;
-        }
 
         #endregion
     }

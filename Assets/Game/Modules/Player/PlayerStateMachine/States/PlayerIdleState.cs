@@ -32,6 +32,14 @@ namespace Game.Modules.Player.PlayerStateMachine.States
             StateMachine.Soap.PutterPressEvent.OnRaised -= OnPutterPress;
         }
 
+        public override void CheckState()
+        {
+            if (IsMoving())
+            {
+                StateMachine.SwitchState(new PlayerMoveState(StateMachine));
+            }
+        }
+        
         public override void Tick(float deltaTime)
         {
             RotateCamera();
