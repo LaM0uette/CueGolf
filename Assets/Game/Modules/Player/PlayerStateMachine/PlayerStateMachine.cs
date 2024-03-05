@@ -63,21 +63,7 @@ namespace Game.Modules.Player.PlayerStateMachine
 
         private void OnCollisionEnter(Collision collision)
         {
-            return;
-            
-            foreach (var contact in collision.contacts)
-            {
-                if (!(contact.normal.y > 0.7f)) 
-                    continue;
-                
-                var velocity = Rigidbody.velocity;
-                velocity.y = 0;
-                Rigidbody.velocity = velocity;
-            }
-            
-            return;
-            
-            if (collision.gameObject.CompareTag("Floor"))
+            if (collision.gameObject.CompareTag("Floor") || collision.contacts.Length <= 0)
                 return;
             
             var ballVelocity = Rigidbody.velocity;

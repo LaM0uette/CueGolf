@@ -254,7 +254,7 @@ MonoBehaviour:
   ForceMultiplier: 6000
   ReboundForce: 0.7
   ShootDistanceOffset: 0.005
-  StopMovementThreshold: 0.2
+  StopMovementThreshold: 1
   _virtualFollowCamera: {fileID: 0}
   MouseSensitivity: 45
   ZoomForce: 65

@@ -6,7 +6,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
     {
         #region Statements
         
-        private float _ballVelocity;
         private float _minimumTimeElapsed;
 
         public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -44,7 +43,6 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         
         public override void Tick(float deltaTime)
         {
-            _ballVelocity = StateMachine.Rigidbody.velocity.magnitude;
             _minimumTimeElapsed += deltaTime;
 
             CheckForStopMovement();
@@ -57,7 +55,9 @@ namespace Game.Modules.Player.PlayerStateMachine.States
         
         private void CheckForStopMovement()
         {
-            if (!(_ballVelocity <= StateMachine.StopMovementThreshold)) 
+            var magnitude = StateMachine.Rigidbody.velocity.magnitude + StateMachine.Rigidbody.angularVelocity.magnitude;
+            
+            if (_minimumTimeElapsed < 2f || magnitude > StateMachine.StopMovementThreshold )
                 return;
             
             StateMachine.Rigidbody.velocity = Vector3.zero;
